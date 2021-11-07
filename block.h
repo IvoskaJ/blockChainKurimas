@@ -1,53 +1,26 @@
 #pragma once
 #include "User.h"
-#include "sha256.cpp"
-#include <iostream>
-#include <cmath>
 
 using namespace std;
 
-class transactionList {
-private:
-	int amountTraded;
-	user user;
-protected:
-
-public:
-	transactionList() {
-
-	}
-
-	void getTransactions() {
-
-	}
-};
-
-class block {
+class blockGenesis {
 	private:
-	transactionList list;
 	string blockHash;
-	string prevBlockHash;
 	string timeStamp;
 	int nonce;
 	int version;
 	int difficultyTarget;
-
+    vector<transaction> transactionList;
 	protected:
-	string prevBlockHash(block block) {
-		this->prevBlockHash = block.getBlockHash();
-	}
 
 	public:
-	block() {
+	blockGenesis() {
 		nonce = fabs(rand());
 		blockHash = sha256(to_string(nonce));
 		time_t now = time(0);
 		timeStamp = ctime(&now);
 		version = 0.1;
 		difficultyTarget = 0;
-	}
-	string getPrevBlockHash() {
-		return prevBlockHash;
 	}
 	string getBlockHash() {
 		return blockHash;
@@ -58,7 +31,29 @@ class block {
 	int getVersion() {
 		return version;
 	}
+    void getTransaction(int index){
+        cout << "user1: " << transactionList.at(index).getUser1PubKey() << endl;
+        cout << "user2: " << transactionList.at(index).getUser2PubKey() << endl;
+        cout << "amount sent from user1 to user2" << transactionList.at(index).getAmountTraded() << endl;
+        cout << "time tranaction occured at: " << transactionList.at(index).getTimestamp() << endl;
+    }
 
+    vector<transaction> addTransactionToBlock(transaction transaction){
+        this->transactionList.push_back(transaction);
+        return this->transactionList;
+    }
 };
 
-block genesis;
+blockGenesis genesis;
+
+class block: public blockGenesis{
+    private:
+    string prevBlockHash;
+    protected:
+    string takePrevBlockHash(block block){
+        this->prevBlockHash = block.getBlockHash();
+        return this->prevBlockHash;
+        }
+    public:
+    string getPrevBlockHash(){return this->prevBlockHash;}
+};
