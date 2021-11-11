@@ -91,6 +91,7 @@ class transaction{
      user user1;
      user user2;
      int amountTraded;
+     string transactionHash;
  public:
      user setUser1(user user){
         this->user1 = user;
@@ -116,11 +117,15 @@ class transaction{
      int getAmountTraded() {
          return this->amountTraded;
      }
+     string getTransactionHash(){
+        return this->transactionHash;
+     }
 
     void performTransaction(int amountTraded){
         user1.setBalance(this->amountTraded);
         user2.setBalance(-(this->amountTraded));
         time_t now = time(0);
         this->timestamp = ctime(&now);
+        this->transactionHash = sha256(to_string(amountTraded) + getUser1PubKey() + getUser2PubKey() + getTimestamp());
     }
 };

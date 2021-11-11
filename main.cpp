@@ -77,7 +77,7 @@ int main() {
         cout << "user" << userIndex << "name: " << users.at(userIndex).getName() << endl;
         cout << "user" << userIndex << "balance: " << users.at(userIndex).getBalance() << endl;
     }
-    if (answer == 6){
+    if (answer == 7){
         endProgram = 1;
     }
     } while (endProgram == 0);

@@ -96,7 +96,9 @@ class block {
     }
 
     void getTransaction(int index){
-        cout << "transaction " << index << endl;
+        cout << "transaction: " << index << endl;
+        cout << "--------------------------------" << endl;
+        cout << "transaction hash: " << transactionList.at(index).getTransactionHash() << endl;
         cout << "--------------------------------" << endl;
         cout << "user1: " << transactionList.at(index).getUser1PubKey() << endl;
         cout << "--------------------------------" << endl;
@@ -116,7 +118,9 @@ class block {
     void printListOfTransactions(){
         ofstream fr(getBlockHash() + ".txt");
         for(int i=0; i<transactionList.size(); i++){
-            fr << "transaction " << i << endl;
+            fr << "transaction: " << i << endl;
+            fr << "--------------------------------" << endl;
+            fr << "transaction hash: " << transactionList.at(i).getTransactionHash() << endl;
             fr << "--------------------------------" << endl;
             fr << "user1: " << transactionList.at(i).getUser1PubKey() << endl;
             fr << "--------------------------------" << endl;
