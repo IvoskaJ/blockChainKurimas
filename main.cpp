@@ -14,9 +14,10 @@ int main() {
     cout << "if you would like to see the current block data, enter 3" << endl;
     cout << "if you would like to see a specific transaction within the current block, enter 4" << endl;
     cout << "if you would like the program to create a list of transactions for the last block, enter 5" << endl;
-    cout << "enter 6 if you would like to close the program." << endl;
+    cout << "if you would like to see a users data, please enter 6" << endl;
+    cout << "enter 7 if you would like to close the program." << endl;
     cin >> answer;
-    if ((answer<1) && (answer>6)){
+    if ((answer<1) && (answer>7)){
         cout << "incorrect input, please try again" << endl;
     }
     if (answer == 1){
@@ -67,6 +68,14 @@ int main() {
     if (answer == 5){
         blockChain.back().printListOfTransactions();
         cout << "transaction list has been printed." << endl;
+    }
+    if (answer == 6){
+        int userIndex;
+        cout << "which users data would you like to see? enter a number between 0 and 999" << endl;
+        cin >> userIndex;
+        cout << "user" << userIndex << "public key: " << users.at(userIndex).getPublicKey() << endl;
+        cout << "user" << userIndex << "name: " << users.at(userIndex).getName() << endl;
+        cout << "user" << userIndex << "balance: " << users.at(userIndex).getBalance() << endl;
     }
     if (answer == 6){
         endProgram = 1;
